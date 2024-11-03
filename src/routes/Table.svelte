@@ -13,9 +13,9 @@
 	<thead>
 		<tr>
 			<th onclick={() => State.sortByAverage()}>Average</th>
-			<th>Country</th>
+			<th onclick={() => State.sortByCountry()}>Country</th>
 			{#each State.sources as source (source.code)}
-				<th onclick={() => State.sort(source.code)}>
+				<th onclick={() => State.sortBy(source.code)}>
 					<a href={source.url} target="_blank" rel="noreferrer">
 						{source.name}
 					</a>

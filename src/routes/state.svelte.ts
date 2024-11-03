@@ -20,7 +20,7 @@ export class CountriesState {
 		this.rankingsByRankingCode = this.getAllRankingsByCode(countries);
 	}
 
-	sort(rankingCode: HtmlDataSource['code']) {
+	sortBy(rankingCode: HtmlDataSource['code']) {
 		const sortKey = this.sortKeysByColumn[rankingCode];
 		const nextSortKey = this.getNextSortKey(sortKey);
 
@@ -47,6 +47,19 @@ export class CountriesState {
 		this.sortKeysByColumn.average = nextSortKey;
 	}
 
+	sortByCountry() {
+		const nextSortKey = this.getNextSortKey(this.sortKeysByColumn.country);
+
+		this.countries.sort((a, b) => {
+			const rankA = a.name;
+			const rankB = b.name;
+
+			return nextSortKey === SortKey.Asc ? rankA.localeCompare(rankB) : rankB.localeCompare(rankA);
+		});
+
+		this.sortKeysByColumn.country = nextSortKey;
+	}
+
 	private getNextSortKey(key: SortKey) {
 		switch (key) {
 			case SortKey.None: {
@@ -68,7 +81,10 @@ export class CountriesState {
 
 				return acc;
 			},
-			{ average: SortKey.None }
+			{
+				average: SortKey.None,
+				country: SortKey.None
+			}
 		);
 	}
 
