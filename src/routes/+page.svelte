@@ -3,10 +3,31 @@
 	import Table from './Table.svelte';
 
 	let { data }: { data: PageData } = $props();
+
+	let countries = $state(data.countries);
+	let rankingsByDataSourceCode = $derived(
+		countries.reduce<Record<string, number[]>>((acc, country) => {
+			const { rankings } = country;
+
+			if (!rankings) {
+				return acc;
+			}
+
+			Object.entries(rankings).forEach(([dataSourceCode, rank]) => {
+				if (!acc[dataSourceCode]) {
+					acc[dataSourceCode] = [];
+				}
+
+				acc[dataSourceCode].push(rank);
+			});
+
+			return acc;
+		}, {})
+	);
 </script>
 
 <main>
-	<Table countries={data.countries} />
+	<Table {countries} {rankingsByDataSourceCode} />
 </main>
 
 <style>

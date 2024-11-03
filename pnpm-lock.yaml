@@ -9,7 +9,7 @@ devDependencies:
     specifier: ^4.7.4
     version: 4.7.4(@sveltejs/kit@2.7.4)(wrangler@3.84.1)
   '@sveltejs/kit':
-    specifier: ^2.0.0
+    specifier: ^2.7.4
     version: 2.7.4(@sveltejs/vite-plugin-svelte@4.0.0)(svelte@5.1.9)(vite@5.4.10)
   '@sveltejs/vite-plugin-svelte':
     specifier: ^4.0.0

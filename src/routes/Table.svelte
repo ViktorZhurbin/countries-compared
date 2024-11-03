@@ -1,10 +1,14 @@
 <script lang="ts">
 	import { dataSources } from '$lib/constants/dataSources';
 	import type { PreparedCountry } from '$lib/schema/country';
+	import { getRankedBackgroundColor } from '$lib/utils/colorScale';
 
 	const sources = Object.values(dataSources);
 
-	let props: { countries: PreparedCountry[] } = $props();
+	let props: {
+		countries: PreparedCountry[];
+		rankingsByDataSourceCode: Record<string, number[]>;
+	} = $props();
 </script>
 
 <table>
@@ -27,8 +31,15 @@
 				<td>{country.average}</td>
 				<td>{country.name}</td>
 				{#each sources as source (source.code)}
-					<td>
-						{country.rankings?.[source.code]}
+					{@const rank = country.rankings?.[source.code]}
+					{@const entryRankings = props.rankingsByDataSourceCode[source.code]}
+
+					{@const backgroundColor = rank
+						? getRankedBackgroundColor(rank, entryRankings)
+						: undefined}
+
+					<td style:background-color={backgroundColor}>
+						{rank}
 					</td>
 				{/each}
 			</tr>
