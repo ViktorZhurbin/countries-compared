@@ -13,7 +13,7 @@ export class CountriesState {
 	rankingsByRankingCode: Record<string, number[]> = {};
 
 	countries: PreparedCountry[] = $state([]);
-	sortKeysByRankingCode = $state(this.getInitialSortKeysByRankingCode());
+	sortKeysByColumn = $state(this.getInitialSortKeysByColumn());
 
 	constructor(countries: PreparedCountry[]) {
 		this.countries = countries;
@@ -21,7 +21,7 @@ export class CountriesState {
 	}
 
 	sort(rankingCode: HtmlDataSource['code']) {
-		const sortKey = this.sortKeysByRankingCode[rankingCode];
+		const sortKey = this.sortKeysByColumn[rankingCode];
 		const nextSortKey = this.getNextSortKey(sortKey);
 
 		this.countries.sort((a, b) => {
@@ -31,7 +31,20 @@ export class CountriesState {
 			return nextSortKey === SortKey.Asc ? rankA - rankB : rankB - rankA;
 		});
 
-		this.sortKeysByRankingCode[rankingCode] = nextSortKey;
+		this.sortKeysByColumn[rankingCode] = nextSortKey;
+	}
+
+	sortByAverage() {
+		const nextSortKey = this.getNextSortKey(this.sortKeysByColumn.average);
+
+		this.countries.sort((a, b) => {
+			const rankA = a.average;
+			const rankB = b.average;
+
+			return nextSortKey === SortKey.Asc ? rankA - rankB : rankB - rankA;
+		});
+
+		this.sortKeysByColumn.average = nextSortKey;
 	}
 
 	private getNextSortKey(key: SortKey) {
@@ -48,12 +61,15 @@ export class CountriesState {
 		}
 	}
 
-	private getInitialSortKeysByRankingCode() {
-		return this.sources.reduce<Record<string, SortKey>>((acc, current) => {
-			acc[current.code] = SortKey.None;
+	private getInitialSortKeysByColumn() {
+		return this.sources.reduce<Record<string, SortKey>>(
+			(acc, current) => {
+				acc[current.code] = SortKey.None;
 
-			return acc;
-		}, {});
+				return acc;
+			},
+			{ average: SortKey.None }
+		);
 	}
 
 	private getAllRankingsByCode(countries: PreparedCountry[]) {

@@ -12,7 +12,7 @@
 <table>
 	<thead>
 		<tr>
-			<th>Rank</th>
+			<th onclick={() => State.sortByAverage()}>Average</th>
 			<th>Country</th>
 			{#each State.sources as source (source.code)}
 				<th onclick={() => State.sort(source.code)}>
