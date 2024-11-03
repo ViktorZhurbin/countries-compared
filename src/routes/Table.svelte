@@ -1,14 +1,12 @@
 <script lang="ts">
-	import { dataSources } from '$lib/constants/dataSources';
 	import type { PreparedCountry } from '$lib/schema/country';
-	import { getRankedBackgroundColor } from '$lib/utils/colorScale';
-
-	const sources = Object.values(dataSources);
+	import { CountriesState } from './state.svelte';
 
 	let props: {
 		countries: PreparedCountry[];
-		rankingsByDataSourceCode: Record<string, number[]>;
 	} = $props();
+
+	const State = new CountriesState(props.countries);
 </script>
 
 <table>
@@ -16,8 +14,8 @@
 		<tr>
 			<th>Rank</th>
 			<th>Country</th>
-			{#each sources as source}
-				<th>
+			{#each State.sources as source (source.code)}
+				<th onclick={() => State.sort(source.code)}>
 					<a href={source.url} target="_blank" rel="noreferrer">
 						{source.name}
 					</a>
@@ -26,17 +24,13 @@
 		</tr>
 	</thead>
 	<tbody>
-		{#each props.countries as country (country.code)}
+		{#each State.countries as country (country.code)}
 			<tr>
 				<td>{country.average}</td>
 				<td>{country.name}</td>
-				{#each sources as source (source.code)}
+				{#each State.sources as source (source.code)}
 					{@const rank = country.rankings?.[source.code]}
-					{@const entryRankings = props.rankingsByDataSourceCode[source.code]}
-
-					{@const backgroundColor = rank
-						? getRankedBackgroundColor(rank, entryRankings)
-						: undefined}
+					{@const backgroundColor = State.getRankedBgColor({ rank, rankingCode: source.code })}
 
 					<td style:background-color={backgroundColor}>
 						{rank}
