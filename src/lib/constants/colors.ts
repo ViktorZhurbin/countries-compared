@@ -6,4 +6,6 @@ const colorScale = [
   "rgb(230, 124, 115)",
 ];
 
+// const colorScale = ["lightskyblue", "yellow", "orangered"];
+
 export { colorScale };

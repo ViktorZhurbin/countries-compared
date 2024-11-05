@@ -121,4 +121,13 @@
   });
 </script>
 
-<div style:height="70dvh" style:width="90dvw" bind:this={chartEl}></div>
+<div bind:this={chartEl}></div>
+
+<style>
+  div {
+    height: 70dvh;
+    width: 90dvw;
+
+    border: 1px solid lightgray;
+  }
+</style>
