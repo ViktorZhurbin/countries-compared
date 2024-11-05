@@ -87,7 +87,7 @@
           show: true,
         },
         roam: true,
-        zoom: 2,
+        zoom: 5,
         center: [10, 45],
         nameProperty: "CNTR_CODE",
         data: seriesData,
