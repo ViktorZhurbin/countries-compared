@@ -69,8 +69,9 @@
     },
     visualMap: {
       min: average.min,
+      inverse: true,
       max: average.max,
-      text: ["High", "Low"],
+      text: ["Low", "High"],
       realtime: false,
       calculable: true,
       inRange: {
@@ -87,7 +88,7 @@
           show: true,
         },
         roam: true,
-        zoom: 5,
+        zoom: 6,
         center: [10, 45],
         nameProperty: "CNTR_CODE",
         data: seriesData,
@@ -120,4 +121,4 @@
   });
 </script>
 
-<div style:height="500px" style:width="600px" bind:this={chartEl}></div>
+<div style:height="70dvh" style:width="90dvw" bind:this={chartEl}></div>
