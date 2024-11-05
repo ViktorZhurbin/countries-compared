@@ -13,9 +13,13 @@ export async function getCountries() {
   }).lean();
 
   return countries
-    .map((country) => {
+    .flatMap((country) => {
       const rankings = Object.values(country.rankings ?? {});
       const average = getArrayAverage(rankings.filter(Boolean));
+
+      if (!average) {
+        return [];
+      }
 
       return {
         average,

@@ -1,5 +1,5 @@
 {
-  "name": "coutries-compared--svelte",
+  "name": "coutries-compared",
   "version": "0.0.1",
   "type": "module",
   "scripts": {
@@ -11,11 +11,12 @@
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint ."
   },
-  "devDependencies": {
+  "dependencies": {
     "@sveltejs/adapter-cloudflare": "^4.7.4",
     "@sveltejs/kit": "^2.7.4",
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@types/eslint": "^9.6.0",
+    "echarts": "^5.5.1",
     "eslint": "^9.14.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-svelte": "^2.46.0",

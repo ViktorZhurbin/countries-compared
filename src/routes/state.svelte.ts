@@ -1,3 +1,4 @@
+import { colorScale } from "$lib/constants/colors";
 import { dataSources } from "$lib/constants/dataSources";
 import type { HtmlDataSource } from "$lib/constants/dataSources/types";
 import type { PreparedCountry } from "$lib/schema/country";
@@ -110,14 +111,6 @@ export class CountriesState {
     }, {});
   }
 
-  static scaleColors = [
-    "rgb(87, 187, 138)",
-    "rgb(171, 201, 120)",
-    "rgb(255, 214, 102)",
-    "rgb(243, 169, 109)",
-    "rgb(230, 124, 115)",
-  ];
-
   getRankedBgColor({
     rank,
     rankingCode,
@@ -133,12 +126,10 @@ export class CountriesState {
     const sortedArray = [...array].sort((a, b) => a - b);
 
     const index = sortedArray.indexOf(rank);
-    const segmentLength = Math.floor(
-      array.length / CountriesState.scaleColors.length,
-    );
+    const segmentLength = Math.floor(array.length / colorScale.length);
 
     const segment = Math.floor(index / segmentLength);
 
-    return CountriesState.scaleColors[segment];
+    return colorScale[segment];
   }
 }
