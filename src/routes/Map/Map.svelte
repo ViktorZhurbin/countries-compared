@@ -11,7 +11,10 @@
   import { onMount } from "svelte";
   import type { PreparedCountry } from "$lib/schema/country";
   import { getOptions } from "./helpers/getOptions";
-  import { HtmlDataSourceCode } from "$lib/constants/dataSources/html";
+  import {
+    HtmlDataSourceCode,
+    htmlDataSources,
+  } from "$lib/constants/dataSources/html";
 
   let props: {
     geoJson: any;
@@ -20,7 +23,7 @@
 
   const MAP_ID = "Europe";
 
-  const dataId = $state(HtmlDataSourceCode.HDI);
+  let dataId = $state(HtmlDataSourceCode.HDI);
 
   let options = $derived(
     getOptions({
@@ -52,12 +55,48 @@
     chart = init(chartEl);
     chart.setOption(options);
   });
+
+  $effect(() => {
+    chart.setOption(options);
+  });
 </script>
 
-<div bind:this={chartEl}></div>
+<div class="wrapper">
+  <div class="controls">
+    {#each Object.values(htmlDataSources) as dataSource (dataSource.code)}
+      <label>
+        <input
+          type="radio"
+          value={dataSource.code}
+          checked={dataId === dataSource.code}
+          onchange={(event) => {
+            dataId = event.currentTarget.value as HtmlDataSourceCode;
+          }}
+        />
+        <span>{dataSource.name}</span>
+        <a href={dataSource.url} target="_blank" rel="noreferrer">(link)</a>
+      </label>
+    {/each}
+  </div>
+  <div class="chart" bind:this={chartEl}></div>
+</div>
 
 <style>
-  div {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .chart {
     height: 70dvh;
     width: 90dvw;
 
