@@ -1,9 +1,7 @@
 import { staticDataSources } from "$lib/constants/dataSources/static";
 import { CountryModel } from "$lib/schema/country";
-import * as mongoose from "mongoose";
 import { getChangedEntriesFnByStaticSourceId } from "./helpers/changedEntriesByDataSource/getChangedEntriesFnByStaticSourceId";
 import { getCountriesByAllNames } from "./helpers/getCountriesByAllNames";
-import { MONGODB_URI } from "$env/static/private";
 // import { updateChangedEntries } from "./helpers/updateChangedEntries";
 
 export const updateRankingsForStaticSources = async () => {
@@ -29,15 +27,3 @@ export const updateRankingsForStaticSources = async () => {
     // }
   }
 };
-
-export async function GET() {
-  try {
-    await mongoose.connect(MONGODB_URI);
-    await updateRankingsForStaticSources();
-    await mongoose.disconnect();
-    return Response.json({ status: "OK" });
-  } catch (error) {
-    console.log(error);
-    return Response.json({ status: "ERROR", error });
-  }
-}
