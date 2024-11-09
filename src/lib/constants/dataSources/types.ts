@@ -1,4 +1,4 @@
-import type { StaticDataSourceCode } from "./static";
+import type { StaticDataSourceId } from "./static";
 
 type DataSourceBase<T> = {
   id: T;
@@ -6,7 +6,7 @@ type DataSourceBase<T> = {
   name: string;
 };
 
-type StaticDataSource = DataSourceBase<StaticDataSourceCode> & {
+type StaticDataSource = DataSourceBase<StaticDataSourceId> & {
   tableSelector: string;
   rowsSelector?: string;
 };

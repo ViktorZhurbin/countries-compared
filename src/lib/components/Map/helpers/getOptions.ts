@@ -1,13 +1,13 @@
 import {
   staticDataSources,
-  type StaticDataSourceCode,
+  type StaticDataSourceId,
 } from "$lib/constants/dataSources/static";
 import type { PreparedCountry } from "$lib/schema/country";
 import type { EChartsOption } from "echarts";
 
 export const getOptions = (params: {
   mapId: string;
-  dataId: StaticDataSourceCode;
+  dataId: StaticDataSourceId;
   countries: PreparedCountry[];
 }): EChartsOption => {
   const { countries, mapId, dataId } = params;

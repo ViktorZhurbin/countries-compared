@@ -1,0 +1,1 @@
+export { updateRankingsForStaticSources } from "./updateRankingsForStaticSources";

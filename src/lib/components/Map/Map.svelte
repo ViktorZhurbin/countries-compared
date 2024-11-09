@@ -3,7 +3,7 @@
   import { init, use, registerMap, type EChartsType } from "echarts/core";
   import type { PreparedCountry } from "$lib/schema/country";
   import {
-    StaticDataSourceCode,
+    StaticDataSourceId,
     staticDataSources,
   } from "$lib/constants/dataSources/static";
   import { getOptions } from "./helpers/getOptions";
@@ -16,7 +16,7 @@
 
   const MAP_ID = "Europe";
 
-  let dataId = $state(StaticDataSourceCode.HDI);
+  let dataId = $state(StaticDataSourceId.HDI);
 
   let options = $derived(
     getOptions({
@@ -54,7 +54,7 @@
           value={dataSource.id}
           checked={dataId === dataSource.id}
           onchange={(event) => {
-            dataId = event.currentTarget.value as StaticDataSourceCode;
+            dataId = event.currentTarget.value as StaticDataSourceId;
           }}
         />
         <span>{dataSource.name}</span>
