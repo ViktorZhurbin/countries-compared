@@ -63,12 +63,12 @@
 
 <div class="wrapper">
   <div class="controls">
-    {#each Object.values(htmlDataSources) as dataSource (dataSource.code)}
+    {#each Object.values(htmlDataSources) as dataSource (dataSource.id)}
       <label>
         <input
           type="radio"
-          value={dataSource.code}
-          checked={dataId === dataSource.code}
+          value={dataSource.id}
+          checked={dataId === dataSource.id}
           onchange={(event) => {
             dataId = event.currentTarget.value as HtmlDataSourceCode;
           }}

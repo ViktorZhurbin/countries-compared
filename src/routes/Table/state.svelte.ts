@@ -66,7 +66,7 @@ export class CountriesState {
   private getInitialSortKeysByColumn() {
     return this.sources.reduce<Record<string, SortKey>>(
       (acc, current) => {
-        acc[current.code] = SortKey.None;
+        acc[current.id] = SortKey.None;
 
         return acc;
       },

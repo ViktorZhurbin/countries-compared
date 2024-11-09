@@ -1,7 +1,7 @@
 import type { HtmlDataSourceCode } from "./html";
 
 type DataSourceBase<T> = {
-  code: T;
+  id: T;
   url: string;
   name: string;
 };

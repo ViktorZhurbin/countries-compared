@@ -14,8 +14,8 @@
     <tr>
       <th onclick={() => State.sort()}>Average</th>
       <th onclick={() => State.sortByCountry()}>Country</th>
-      {#each State.sources as source (source.code)}
-        <th onclick={() => State.sort(source.code)}>
+      {#each State.sources as source (source.id)}
+        <th onclick={() => State.sort(source.id)}>
           <a href={source.url} target="_blank" rel="noreferrer">
             {source.name}
           </a>
@@ -28,11 +28,11 @@
       <tr>
         <td>{country.rankings.average}</td>
         <td>{country.name}</td>
-        {#each State.sources as source (source.code)}
-          {@const rank = country.rankings?.[source.code]}
+        {#each State.sources as source (source.id)}
+          {@const rank = country.rankings?.[source.id]}
           {@const backgroundColor = State.getRankedBgColor({
             rank,
-            rankingCode: source.code,
+            rankingCode: source.id,
           })}
 
           <td style:background-color={backgroundColor}>
