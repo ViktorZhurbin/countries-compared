@@ -1,30 +1,35 @@
+import {
+  htmlDataSources,
+  type HtmlDataSourceCode,
+} from "$lib/constants/dataSources/html";
 import type { PreparedCountry } from "$lib/schema/country";
 import type { EChartsOption } from "echarts";
 
 export const getOptions = (params: {
   mapId: string;
+  dataId: HtmlDataSourceCode;
   countries: PreparedCountry[];
 }): EChartsOption => {
-  const { countries, mapId } = params;
+  const { countries, mapId, dataId } = params;
 
-  const { avgMin, avgMax, seriesData, codeToName } = countries.reduce<{
-    avgMin: number;
-    avgMax: number;
+  const { min, max, seriesData, codeToName } = countries.reduce<{
+    min: number;
+    max: number;
     seriesData: { name: string; value: number }[];
     codeToName: Record<string, string>;
   }>(
     (acc, country, index) => {
-      if (index === 0 || country.average < acc.avgMin) {
-        acc.avgMin = country.average;
+      if (index === 0 || country.rankings[dataId] < acc.min) {
+        acc.min = country.rankings[dataId];
       }
 
-      if (country.average > acc.avgMax) {
-        acc.avgMax = country.average;
+      if (country.rankings[dataId] > acc.max) {
+        acc.max = country.rankings[dataId];
       }
 
       acc.seriesData.push({
         name: country.name,
-        value: country.average,
+        value: country.rankings[dataId],
       });
 
       if (country.code === "GR") {
@@ -35,12 +40,16 @@ export const getOptions = (params: {
 
       return acc;
     },
-    { avgMin: 0, avgMax: 0, seriesData: [], codeToName: {} },
+    { min: 0, max: 0, seriesData: [], codeToName: {} },
   );
+
+  const dataSource = htmlDataSources[dataId];
 
   return {
     title: {
-      text: "Europe: by average",
+      text: dataSource.name,
+      subtext: "Source",
+      sublink: dataSource.url,
     },
     tooltip: {
       trigger: "item",
@@ -50,8 +59,8 @@ export const getOptions = (params: {
       },
     },
     visualMap: {
-      min: avgMin,
-      max: avgMax,
+      min,
+      max,
       inverse: true,
       text: ["Low", "High"],
       realtime: false,

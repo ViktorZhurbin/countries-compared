@@ -1,6 +1,5 @@
 import { colorScale } from "$lib/constants/colors";
 import { dataSources } from "$lib/constants/dataSources";
-import type { HtmlDataSource } from "$lib/constants/dataSources/types";
 import type { PreparedCountry } from "$lib/schema/country";
 
 enum SortKey {
@@ -21,7 +20,7 @@ export class CountriesState {
     this.rankingsByRankingCode = this.getAllRankingsByCode(countries);
   }
 
-  sortBy(rankingCode: HtmlDataSource["code"]) {
+  sort(rankingCode: string = "average") {
     const sortKey = this.sortKeysByColumn[rankingCode];
     const nextSortKey = this.getNextSortKey(sortKey);
 
@@ -33,19 +32,6 @@ export class CountriesState {
     });
 
     this.sortKeysByColumn[rankingCode] = nextSortKey;
-  }
-
-  sortByAverage() {
-    const nextSortKey = this.getNextSortKey(this.sortKeysByColumn.average);
-
-    this.countries.sort((a, b) => {
-      const rankA = a.average;
-      const rankB = b.average;
-
-      return nextSortKey === SortKey.Asc ? rankA - rankB : rankB - rankA;
-    });
-
-    this.sortKeysByColumn.average = nextSortKey;
   }
 
   sortByCountry() {

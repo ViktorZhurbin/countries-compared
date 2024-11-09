@@ -11,6 +11,7 @@
   import { onMount } from "svelte";
   import type { PreparedCountry } from "$lib/schema/country";
   import { getOptions } from "./helpers/getOptions";
+  import { HtmlDataSourceCode } from "$lib/constants/dataSources/html";
 
   let props: {
     geoJson: any;
@@ -18,10 +19,16 @@
   } = $props();
 
   const MAP_ID = "Europe";
-  const options = getOptions({
-    mapId: MAP_ID,
-    countries: props.countries,
-  });
+
+  const dataId = $state(HtmlDataSourceCode.HDI);
+
+  let options = $derived(
+    getOptions({
+      dataId,
+      mapId: MAP_ID,
+      countries: props.countries,
+    }),
+  );
 
   let chart: EChartsType;
   let chartEl: HTMLDivElement;

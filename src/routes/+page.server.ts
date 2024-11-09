@@ -7,6 +7,6 @@ export const prerender = true;
 export const load: PageServerLoad = async () => {
   return {
     geoJsonEurope: geoJsonEurope as unknown,
-    countries: await getCountries(),
+    countries: JSON.parse(await getCountries()),
   };
 };

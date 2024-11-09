@@ -13,8 +13,7 @@ const countrySchema = new mongoose.Schema({
 type CountryType = mongoose.InferSchemaType<typeof countrySchema>;
 
 interface PreparedCountry extends Omit<CountryType, "rankings"> {
-  average: number;
-  rankings?: Record<string, number> | null;
+  rankings: Record<string, number>;
 }
 
 const ExistingModel = mongoose.connection.models[

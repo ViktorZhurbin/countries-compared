@@ -8,23 +8,29 @@ export async function getCountries() {
   mongoose.connect(MONGODB_URI);
   // mongoose.set("debug", true);
 
-  const countries = await CountryModel.find({
+  const selectedCountries = await CountryModel.find({
     aliases: { $in: countriesOfInterest },
   }).lean();
 
-  return countries
-    .flatMap((country) => {
-      const rankings = Object.values(country.rankings ?? {});
-      const average = getArrayAverage(rankings.filter(Boolean));
+  const countries = selectedCountries.flatMap((country) => {
+    if (!country.rankings) {
+      country.rankings = {};
+    }
 
-      if (!average) {
-        return [];
-      }
+    const rankings = Object.values(country.rankings);
 
-      return {
-        average,
-        ...JSON.parse(JSON.stringify(country)),
-      } as PreparedCountry;
-    })
-    .sort((a, b) => a.average - b.average);
+    if (!rankings.length) {
+      return [];
+    }
+
+    const average = getArrayAverage(rankings.filter(Boolean));
+
+    if (average) {
+      country.rankings.average = average;
+    }
+
+    return country as PreparedCountry;
+  });
+
+  return JSON.stringify(countries);
 }

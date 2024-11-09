@@ -12,10 +12,10 @@
 <table>
   <thead>
     <tr>
-      <th onclick={() => State.sortByAverage()}>Average</th>
+      <th onclick={() => State.sort()}>Average</th>
       <th onclick={() => State.sortByCountry()}>Country</th>
       {#each State.sources as source (source.code)}
-        <th onclick={() => State.sortBy(source.code)}>
+        <th onclick={() => State.sort(source.code)}>
           <a href={source.url} target="_blank" rel="noreferrer">
             {source.name}
           </a>
@@ -26,7 +26,7 @@
   <tbody>
     {#each State.countries as country (country.code)}
       <tr>
-        <td>{country.average}</td>
+        <td>{country.rankings.average}</td>
         <td>{country.name}</td>
         {#each State.sources as source (source.code)}
           {@const rank = country.rankings?.[source.code]}

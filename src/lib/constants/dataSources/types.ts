@@ -1,11 +1,14 @@
-import { HtmlDataSourceCode } from "./html";
+import type { HtmlDataSourceCode } from "./html";
 
-type DataSource<T> = {
+type DataSourceBase<T> = {
   code: T;
   url: string;
   name: string;
+};
+
+type HtmlDataSource = DataSourceBase<HtmlDataSourceCode> & {
   tableSelector: string;
   rowsSelector?: string;
 };
 
-export type HtmlDataSource = DataSource<HtmlDataSourceCode>;
+export type { HtmlDataSource };
