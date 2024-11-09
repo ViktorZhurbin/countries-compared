@@ -1,6 +1,6 @@
 <script lang="ts">
+  import Map from "$lib/components/Map/Map.svelte";
   import type { PageData } from "./$types";
-  import Map from "./Map/Map.svelte";
 
   let { data }: { data: PageData } = $props();
 </script>

@@ -1,13 +1,13 @@
 import {
-  htmlDataSources,
-  type HtmlDataSourceCode,
-} from "$lib/constants/dataSources/html";
+  staticDataSources,
+  type StaticDataSourceCode,
+} from "$lib/constants/dataSources/static";
 import type { PreparedCountry } from "$lib/schema/country";
 import type { EChartsOption } from "echarts";
 
 export const getOptions = (params: {
   mapId: string;
-  dataId: HtmlDataSourceCode;
+  dataId: StaticDataSourceCode;
   countries: PreparedCountry[];
 }): EChartsOption => {
   const { countries, mapId, dataId } = params;
@@ -43,7 +43,7 @@ export const getOptions = (params: {
     { min: 0, max: 0, seriesData: [], codeToName: {} },
   );
 
-  const dataSource = htmlDataSources[dataId];
+  const dataSource = staticDataSources[dataId];
 
   return {
     title: {

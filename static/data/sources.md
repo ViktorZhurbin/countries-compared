@@ -1,1 +1,1 @@
-Europe data: https://gisco-services.ec.europa.eu/distribution/v2/nuts/download/#nuts24
+Source for Europe geo data: https://gisco-services.ec.europa.eu/distribution/v2/nuts/download/#nuts24. Saved as `static/data/ref-nuts-2024-10m.geojson.zip` file - we use `NUTS_RG_10M_2024_4326_LEVL_0.geojson` for the map specifically.

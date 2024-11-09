@@ -1,4 +1,4 @@
-export const countriesOfInterest = [
+export const selectedCountries = [
   "Finland",
   "Denmark",
   "Netherlands",

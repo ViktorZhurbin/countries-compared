@@ -1,20 +1,13 @@
 <script lang="ts">
-  import { init, use, registerMap, type EChartsType } from "echarts/core";
-  import {
-    TitleComponent,
-    TooltipComponent,
-    VisualMapComponent,
-    GeoComponent,
-  } from "echarts/components";
-  import { MapChart } from "echarts/charts";
-  import { CanvasRenderer } from "echarts/renderers";
   import { onMount } from "svelte";
+  import { init, use, registerMap, type EChartsType } from "echarts/core";
   import type { PreparedCountry } from "$lib/schema/country";
-  import { getOptions } from "./helpers/getOptions";
   import {
-    HtmlDataSourceCode,
-    htmlDataSources,
-  } from "$lib/constants/dataSources/html";
+    StaticDataSourceCode,
+    staticDataSources,
+  } from "$lib/constants/dataSources/static";
+  import { getOptions } from "./helpers/getOptions";
+  import { chartModules } from "./constants/chartModules";
 
   let props: {
     geoJson: any;
@@ -23,7 +16,7 @@
 
   const MAP_ID = "Europe";
 
-  let dataId = $state(HtmlDataSourceCode.HDI);
+  let dataId = $state(StaticDataSourceCode.HDI);
 
   let options = $derived(
     getOptions({
@@ -37,15 +30,7 @@
   let chartEl: HTMLDivElement;
 
   onMount(async () => {
-    use([
-      TitleComponent,
-      TooltipComponent,
-      VisualMapComponent,
-      GeoComponent,
-      MapChart,
-      CanvasRenderer,
-    ]);
-
+    use(chartModules);
     registerMap(MAP_ID, props.geoJson);
 
     if (chart) {
@@ -53,7 +38,6 @@
     }
 
     chart = init(chartEl);
-    chart.setOption(options);
   });
 
   $effect(() => {
@@ -63,14 +47,14 @@
 
 <div class="wrapper">
   <div class="controls">
-    {#each Object.values(htmlDataSources) as dataSource (dataSource.id)}
+    {#each Object.values(staticDataSources) as dataSource (dataSource.id)}
       <label>
         <input
           type="radio"
           value={dataSource.id}
           checked={dataId === dataSource.id}
           onchange={(event) => {
-            dataId = event.currentTarget.value as HtmlDataSourceCode;
+            dataId = event.currentTarget.value as StaticDataSourceCode;
           }}
         />
         <span>{dataSource.name}</span>

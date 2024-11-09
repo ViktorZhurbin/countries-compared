@@ -1,5 +1,5 @@
 import { MONGODB_URI } from "$env/static/private";
-import { countriesOfInterest } from "$lib/constants/countriesOfInterest";
+import { selectedCountries } from "$lib/constants/countries";
 import { CountryModel, type PreparedCountry } from "$lib/schema/country";
 import * as mongoose from "mongoose";
 
@@ -7,11 +7,11 @@ export async function getCountries() {
   mongoose.connect(MONGODB_URI);
   // mongoose.set("debug", true);
 
-  const selectedCountries = await CountryModel.find({
-    aliases: { $in: countriesOfInterest },
+  const countries = await CountryModel.find({
+    aliases: { $in: selectedCountries },
   }).lean();
 
-  const countries = selectedCountries.flatMap((country) => {
+  const preparedCountries = countries.flatMap((country) => {
     if (!country.rankings) {
       return [];
     }
@@ -19,5 +19,5 @@ export async function getCountries() {
     return country as PreparedCountry;
   });
 
-  return JSON.stringify(countries);
+  return JSON.stringify(preparedCountries);
 }

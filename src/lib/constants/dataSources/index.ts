@@ -1,3 +1,3 @@
-import { htmlDataSources } from "./html";
+import { staticDataSources } from "./static";
 
-export const dataSources = htmlDataSources;
+export const dataSources = staticDataSources;

@@ -1,5 +1,5 @@
 import { getCountries } from "$lib/server/database/getCountries";
-import geoJsonEurope from "$lib/server/database/EuropeGeoJson.json";
+import geoJsonEurope from "$lib/server/database/europeGeoJson.json"; // see static/data/sources.md
 import type { PageServerLoad } from "./$types";
 
 export const prerender = true;

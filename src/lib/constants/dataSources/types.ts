@@ -1,4 +1,4 @@
-import type { HtmlDataSourceCode } from "./html";
+import type { StaticDataSourceCode } from "./static";
 
 type DataSourceBase<T> = {
   id: T;
@@ -6,9 +6,9 @@ type DataSourceBase<T> = {
   name: string;
 };
 
-type HtmlDataSource = DataSourceBase<HtmlDataSourceCode> & {
+type StaticDataSource = DataSourceBase<StaticDataSourceCode> & {
   tableSelector: string;
   rowsSelector?: string;
 };
 
-export type { HtmlDataSource };
+export type { StaticDataSource };
