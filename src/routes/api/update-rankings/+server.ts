@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { MONGODB_URI } from "$env/static/private";
 import { updateRankingsForStaticSources } from "$lib/server/scrappers/staticSources";
 
-export async function GET() {
+export async function POST() {
   try {
     await mongoose.connect(MONGODB_URI);
 
