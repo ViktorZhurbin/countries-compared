@@ -6,7 +6,11 @@
 </script>
 
 <main>
-  <Map countries={data.countries} geoJson={data.geoJsonEurope} />
+  <Map
+    countries={data.countries}
+    geoJson={data.geoJsonEurope}
+    lastUpdated={data.lastUpdated}
+  />
 </main>
 
 <style>

@@ -11,18 +11,22 @@
 
   let props: {
     geoJson: any;
+    lastUpdated: string;
     countries: PreparedCountry[];
   } = $props();
 
   const MAP_ID = "Europe";
 
+  let countries = $state(props.countries);
   let dataId = $state(StaticDataSourceId.HDI);
+  let lastUpdated = $state(props.lastUpdated);
+  let isUpdating = $state(false);
 
   let options = $derived(
     getOptions({
       dataId,
+      countries,
       mapId: MAP_ID,
-      countries: props.countries,
     }),
   );
 
@@ -43,10 +47,35 @@
   $effect(() => {
     chart.setOption(options);
   });
+
+  const handleUpdate = async () => {
+    isUpdating = true;
+
+    const response = await fetch("/api/update-rankings", {
+      method: "POST",
+    });
+
+    const res: { lastUpdated: string; countries: string } =
+      await response.json();
+
+    countries = JSON.parse(res.countries) as PreparedCountry[];
+    lastUpdated = res.lastUpdated;
+
+    isUpdating = false;
+  };
 </script>
 
 <div class="wrapper">
   <div class="controls">
+    <div>
+      <button disabled={isUpdating} onclick={handleUpdate}> Update </button>
+      <span>
+        {isUpdating
+          ? "Updating..."
+          : `Last updated: ${new Date(lastUpdated).toLocaleString()}`}
+      </span>
+    </div>
+
     {#each Object.values(staticDataSources) as dataSource (dataSource.id)}
       <label>
         <input
@@ -62,6 +91,7 @@
       </label>
     {/each}
   </div>
+
   <div class="chart" bind:this={chartEl}></div>
 </div>
 

@@ -14,5 +14,5 @@ export async function getCountries() {
     return country as PreparedCountry;
   });
 
-  return JSON.stringify(preparedCountries);
+  return JSON.stringify(preparedCountries ?? []);
 }
