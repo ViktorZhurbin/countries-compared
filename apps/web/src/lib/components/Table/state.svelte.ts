@@ -1,6 +1,6 @@
 import { colorScale } from "$lib/constants/colors";
-import { dataSources } from "$lib/constants/dataSources";
-import type { PreparedCountry } from "$lib/schema/country";
+import { dataSources } from "@countries/shared/src/constants/dataSources";
+import type { PreparedCountry } from "@countries/shared/src/schema/country";
 
 enum SortKey {
   None = "none",

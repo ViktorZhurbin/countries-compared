@@ -1,1 +1,0 @@
-export { updateRankingsForStaticSources } from "./updateRankingsForStaticSources";

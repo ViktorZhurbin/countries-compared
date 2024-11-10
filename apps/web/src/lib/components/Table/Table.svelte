@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { PreparedCountry } from "$lib/schema/country";
+  import type { PreparedCountry } from "@countries/shared/src/schema/country";
   import { CountriesState } from "./state.svelte";
 
   let props: {

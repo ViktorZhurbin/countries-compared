@@ -1,8 +1,8 @@
 import {
   staticDataSources,
   type StaticDataSourceId,
-} from "$lib/constants/dataSources/static";
-import type { PreparedCountry } from "$lib/schema/country";
+} from "@countries/shared/src/constants/dataSources/static";
+import type { PreparedCountry } from "@countries/shared/src/schema/country";
 import type { EChartsOption } from "echarts";
 
 export const getOptions = (params: {

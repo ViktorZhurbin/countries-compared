@@ -1,5 +1,8 @@
 import { selectedCountries } from "$lib/constants/countries";
-import { CountryModel, type PreparedCountry } from "$lib/schema/country";
+import {
+  CountryModel,
+  type PreparedCountry,
+} from "@countries/shared/src/schema/country";
 
 export async function getCountries() {
   const countries = await CountryModel.find({

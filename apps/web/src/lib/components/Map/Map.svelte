@@ -1,13 +1,14 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { init, use, registerMap, type EChartsType } from "echarts/core";
-  import type { PreparedCountry } from "$lib/schema/country";
+  import type { PreparedCountry } from "@countries/shared/src/schema/country";
+
+  import { getOptions } from "./helpers/getOptions";
+  import { chartModules } from "./constants/chartModules";
   import {
     StaticDataSourceId,
     staticDataSources,
-  } from "$lib/constants/dataSources/static";
-  import { getOptions } from "./helpers/getOptions";
-  import { chartModules } from "./constants/chartModules";
+  } from "@countries/shared/src/constants/dataSources/static";
 
   let props: {
     geoJson: any;
