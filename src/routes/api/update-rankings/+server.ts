@@ -3,8 +3,9 @@ import { MONGODB_URI } from "$env/static/private";
 import { updateRankingsForStaticSources } from "$lib/server/scrappers/staticSources";
 import { UpdateModel } from "$lib/schema/updated";
 import { getCountries } from "$lib/server/database/getCountries";
+import type { RequestHandler } from "./$types";
 
-export async function POST() {
+export const POST: RequestHandler = async () => {
   try {
     await mongoose.connect(MONGODB_URI);
 
@@ -30,4 +31,4 @@ export async function POST() {
     console.log(error);
     return Response.json({ status: "ERROR", error });
   }
-}
+};

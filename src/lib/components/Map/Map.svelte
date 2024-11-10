@@ -53,13 +53,17 @@
 
     const response = await fetch("/api/update-rankings", {
       method: "POST",
+      body: JSON.stringify({}),
+      headers: {
+        "content-type": "application/json",
+      },
     });
 
-    const res: { lastUpdated: string; countries: string } =
+    const responseData: { lastUpdated: string; countries: string } =
       await response.json();
 
-    countries = JSON.parse(res.countries) as PreparedCountry[];
-    lastUpdated = res.lastUpdated;
+    countries = JSON.parse(responseData.countries) as PreparedCountry[];
+    lastUpdated = responseData.lastUpdated;
 
     isUpdating = false;
   };
