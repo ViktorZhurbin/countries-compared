@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@sveltejs/adapter-cloudflare": "^4.7.4",
+    "@sveltejs/adapter-vercel": "^5.4.7",
     "@sveltejs/kit": "^2.7.4",
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@types/eslint": "^9.6.0",
