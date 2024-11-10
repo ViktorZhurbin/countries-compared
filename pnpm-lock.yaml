@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@cloudflare/workers-types':
-    specifier: ^4.20241106.0
-    version: 4.20241106.0
   '@sveltejs/adapter-cloudflare':
     specifier: ^4.7.4
     version: 4.7.4(@sveltejs/kit@2.8.0)(wrangler@3.86.0)
@@ -62,9 +59,6 @@ dependencies:
   vite:
     specifier: ^5.4.10
     version: 5.4.10
-  wrangler:
-    specifier: ^3.86.0
-    version: 3.86.0(@cloudflare/workers-types@4.20241106.0)
 
 packages:
 
@@ -890,7 +884,7 @@ packages:
       '@sveltejs/kit': 2.8.0(@sveltejs/vite-plugin-svelte@4.0.0)(svelte@5.1.13)(vite@5.4.10)
       esbuild: 0.21.5
       worktop: 0.8.0-next.18
-      wrangler: 3.86.0(@cloudflare/workers-types@4.20241106.0)
+      wrangler: 3.86.0
     dev: false
 
   /@sveltejs/kit@2.8.0(@sveltejs/vite-plugin-svelte@4.0.0)(svelte@5.1.13)(vite@5.4.10):
@@ -2833,7 +2827,7 @@ packages:
       regexparam: 3.0.0
     dev: false
 
-  /wrangler@3.86.0(@cloudflare/workers-types@4.20241106.0):
+  /wrangler@3.86.0:
     resolution: {integrity: sha512-jL670AFVPLTILvEjAL165aYM/ZqtZCqT+e6LKiniflRZxSGKu4o/wyHeOmOM6i5kYJHSmF40E4lOZqapDtkF8g==}
     engines: {node: '>=16.17.0'}
     hasBin: true
@@ -2845,7 +2839,6 @@ packages:
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
       '@cloudflare/workers-shared': 0.7.1
-      '@cloudflare/workers-types': 4.20241106.0
       '@esbuild-plugins/node-globals-polyfill': 0.2.3(esbuild@0.17.19)
       '@esbuild-plugins/node-modules-polyfill': 0.2.2(esbuild@0.17.19)
       blake3-wasm: 2.1.5
