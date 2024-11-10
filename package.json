@@ -7,6 +7,8 @@
 	],
 	"scripts": {
 		"dev:web": "pnpm --filter @countries/web dev",
-		"build:web": "pnpm --filter @countries/web build"
+		"build:web": "pnpm --filter @countries/web build",
+		"dev:worker": "pnpm --filter @countries/worker dev",
+		"deploy:worker": "pnpm --filter @countries/worker deploy"
 	}
 }
