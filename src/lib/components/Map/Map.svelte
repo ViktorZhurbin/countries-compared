@@ -2,10 +2,8 @@
   import { onMount } from "svelte";
   import { init, use, registerMap, type EChartsType } from "echarts/core";
   import type { PreparedCountry } from "$lib/schema/country";
-  import {
-    StaticDataSourceId,
-    staticDataSources,
-  } from "$lib/constants/dataSources/static";
+  import { StaticDataSourceId } from "$lib/constants/dataSources/static";
+  import DataSourcePicker from "../DataSourcePicker/DataSourcePicker.svelte";
   import UpdateButton from "../UpdateButton/UpdateButton.svelte";
   import { getOptions } from "./helpers/getOptions";
   import { chartModules } from "./constants/chartModules";
@@ -47,35 +45,21 @@
     chart.setOption(options);
   });
 
-  const handleSetCountries = (newCountries: PreparedCountry[]) => {
+  const setDataId = (newDataId: StaticDataSourceId) => {
+    dataId = newDataId;
+  };
+
+  const setCountries = (newCountries: PreparedCountry[]) => {
     countries = newCountries;
   };
 </script>
 
 <div class="wrapper">
-  <div class="controls">
-    {#each Object.values(staticDataSources) as dataSource (dataSource.id)}
-      <label>
-        <input
-          type="radio"
-          value={dataSource.id}
-          checked={dataId === dataSource.id}
-          onchange={(event) => {
-            dataId = event.currentTarget.value as StaticDataSourceId;
-          }}
-        />
-        <span>{dataSource.name}</span>
-        <a href={dataSource.url} target="_blank" rel="noreferrer">(link)</a>
-      </label>
-    {/each}
-  </div>
+  <DataSourcePicker {dataId} {setDataId} />
 
   <div class="chart" bind:this={chartEl}></div>
 
-  <UpdateButton
-    setCountries={handleSetCountries}
-    lastUpdated={props.lastUpdated}
-  />
+  <UpdateButton {setCountries} lastUpdated={props.lastUpdated} />
 </div>
 
 <style>
@@ -84,13 +68,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 12px;
-  }
-
-  .controls {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    gap: 16px;
   }
 
   .chart {
