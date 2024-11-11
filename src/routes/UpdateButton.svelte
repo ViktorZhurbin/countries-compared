@@ -42,3 +42,11 @@
       : `Data updated on ${new Date(lastUpdated).toLocaleString()}`}
   </span>
 </div>
+
+<style>
+  div {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+</style>

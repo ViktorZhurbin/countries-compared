@@ -1,7 +1,7 @@
 <script lang="ts">
-  import DataSourcePicker from "$lib/components/DataSourcePicker/DataSourcePicker.svelte";
-  import Map from "$lib/components/Map/Map.svelte";
-  import UpdateButton from "$lib/components/UpdateButton/UpdateButton.svelte";
+  import Map from "./Map/Map.svelte";
+  import UpdateButton from "./UpdateButton.svelte";
+  import DataSourcePicker from "./DataSourcePicker.svelte";
   import { StaticDataSourceId } from "$lib/constants/dataSources/static";
   import type { PreparedCountry } from "$lib/schema/country";
   import type { PageData } from "./$types";
@@ -13,14 +13,16 @@
 </script>
 
 <main>
-  <DataSourcePicker
-    {dataId}
-    setDataId={(newId) => {
-      dataId = newId;
-    }}
-  />
+  <section>
+    <DataSourcePicker
+      {dataId}
+      setDataId={(newId) => {
+        dataId = newId;
+      }}
+    />
 
-  <Map {dataId} {countries} geoJson={data.geoJsonEurope} />
+    <Map {dataId} {countries} geoJson={data.geoJsonEurope} />
+  </section>
 
   <UpdateButton
     lastUpdated={data.lastUpdated}
@@ -32,8 +34,16 @@
 
 <style>
   main {
-    display: flex;
-    flex-direction: column;
+    height: 100dvh;
+
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 16px;
+    padding: 24px 12px;
+  }
+
+  section {
+    display: grid;
     gap: 16px;
   }
 </style>
