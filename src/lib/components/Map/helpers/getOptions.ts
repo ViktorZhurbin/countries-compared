@@ -6,6 +6,8 @@ import type { PreparedCountry } from "$lib/schema/country";
 import type { EChartsOption } from "echarts";
 import { getDataForOptions } from "./getDataForOptions";
 
+const selectedColor = "#639463";
+
 export const getOptions = (params: {
   mapId: string;
   dataId: StaticDataSourceId;
@@ -49,6 +51,22 @@ export const getOptions = (params: {
       {
         name: "Europe",
         type: "map",
+        selectedMode: "single",
+        emphasis: {
+          itemStyle: {
+            areaColor: selectedColor,
+            // shadowBlur: 1,
+            // shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
+        },
+        select: {
+          itemStyle: {
+            areaColor: selectedColor,
+            borderWidth: 2,
+            // shadowBlur: 1,
+            // shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
+        },
         map: mapId,
         label: {
           show: true,
