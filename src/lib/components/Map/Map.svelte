@@ -6,6 +6,7 @@
     StaticDataSourceId,
     staticDataSources,
   } from "$lib/constants/dataSources/static";
+  import UpdateButton from "../UpdateButton/UpdateButton.svelte";
   import { getOptions } from "./helpers/getOptions";
   import { chartModules } from "./constants/chartModules";
 
@@ -19,8 +20,6 @@
 
   let countries = $state(props.countries);
   let dataId = $state(StaticDataSourceId.HDI);
-  let lastUpdated = $state(props.lastUpdated);
-  let isUpdating = $state(false);
 
   let options = $derived(
     getOptions({
@@ -48,37 +47,17 @@
     chart.setOption(options);
   });
 
-  const handleUpdate = async () => {
-    isUpdating = true;
-
-    const response: {
-      data: { lastUpdated: string; countries: string };
-    } = await fetch("/api/update-rankings", {
-      method: "POST",
-      body: JSON.stringify({}),
-      headers: {
-        "content-type": "application/json",
-      },
-    }).then((response) => response.json());
-
-    lastUpdated = response.data.lastUpdated;
-    countries = JSON.parse(response.data.countries) as PreparedCountry[];
-
-    isUpdating = false;
+  const handleSetCountries = (newCountries: PreparedCountry[]) => {
+    countries = newCountries;
   };
 </script>
 
 <div class="wrapper">
   <div class="controls">
-    <div>
-      <button disabled={isUpdating} onclick={handleUpdate}> Update </button>
-      <span>
-        {isUpdating
-          ? "Updating..."
-          : `Last updated: ${new Date(lastUpdated).toLocaleString()}`}
-      </span>
-    </div>
-
+    <UpdateButton
+      setCountries={handleSetCountries}
+      lastUpdated={props.lastUpdated}
+    />
     {#each Object.values(staticDataSources) as dataSource (dataSource.id)}
       <label>
         <input
