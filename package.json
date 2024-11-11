@@ -7,29 +7,29 @@
     "build": "vite build",
     "preview": "npm run build && vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint ."
   },
   "dependencies": {
-    "@sveltejs/adapter-vercel": "^5.4.7",
     "@sveltejs/kit": "^2.7.4",
-    "@sveltejs/vite-plugin-svelte": "^4.0.0",
-    "@types/eslint": "^9.6.0",
     "cheerio": "^1.0.0",
     "echarts": "^5.5.1",
+    "mongoose": "^8.8.0",
+    "svelte": "^5.1.9",
+    "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-vercel": "^5.4.7",
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "@types/eslint": "^9.6.0",
     "eslint": "^9.14.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-svelte": "^2.46.0",
     "globals": "^15.11.0",
-    "mongoose": "^8.8.0",
     "prettier": "^3.3.2",
     "prettier-plugin-svelte": "^3.2.6",
-    "svelte": "^5.1.9",
     "svelte-check": "^4.0.5",
-    "typescript": "^5.6.3",
     "typescript-eslint": "^8.12.2",
     "vite": "^5.4.10"
-  },
-  "packageManager": "pnpm@8.7.1+sha512.41bb77121614697152da4e052d003baf6fde633fc9a03786ebcd3fdd45c6d066b4dcb3ee6381a076f08b7beccedcced99d61b8548e1b03093b4292727ebe5ea8"
+  }
 }
