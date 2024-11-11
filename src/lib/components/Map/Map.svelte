@@ -54,10 +54,6 @@
 
 <div class="wrapper">
   <div class="controls">
-    <UpdateButton
-      setCountries={handleSetCountries}
-      lastUpdated={props.lastUpdated}
-    />
     {#each Object.values(staticDataSources) as dataSource (dataSource.id)}
       <label>
         <input
@@ -75,6 +71,11 @@
   </div>
 
   <div class="chart" bind:this={chartEl}></div>
+
+  <UpdateButton
+    setCountries={handleSetCountries}
+    lastUpdated={props.lastUpdated}
+  />
 </div>
 
 <style>
@@ -96,6 +97,7 @@
     height: 70dvh;
     width: 90dvw;
 
+    overflow: hidden;
     border: 1px solid lightgray;
   }
 </style>
