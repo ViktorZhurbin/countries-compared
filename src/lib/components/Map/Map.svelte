@@ -51,19 +51,18 @@
   const handleUpdate = async () => {
     isUpdating = true;
 
-    const response = await fetch("/api/update-rankings", {
+    const response: {
+      data: { lastUpdated: string; countries: string };
+    } = await fetch("/api/update-rankings", {
       method: "POST",
       body: JSON.stringify({}),
       headers: {
         "content-type": "application/json",
       },
-    });
+    }).then((response) => response.json());
 
-    const responseData: { lastUpdated: string; countries: string } =
-      await response.json();
-
-    countries = JSON.parse(responseData.countries) as PreparedCountry[];
-    lastUpdated = responseData.lastUpdated;
+    lastUpdated = response.data.lastUpdated;
+    countries = JSON.parse(response.data.countries) as PreparedCountry[];
 
     isUpdating = false;
   };
