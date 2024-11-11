@@ -39,6 +39,6 @@
   <span>
     {isUpdating
       ? "Updating..."
-      : `Last updated: ${new Date(lastUpdated).toLocaleString()}`}
+      : `Data updated on ${new Date(lastUpdated).toLocaleString()}`}
   </span>
 </div>
