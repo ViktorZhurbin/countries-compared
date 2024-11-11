@@ -21,7 +21,9 @@
           props.setDataId(event.currentTarget.value as StaticDataSourceId);
         }}
       />
-      <span>{dataSource.name}</span>
+      <abbr title={dataSource.description}>
+        {dataSource.name}
+      </abbr>
       <a href={dataSource.url} target="_blank" rel="noreferrer">(link)</a>
     </label>
   {/each}

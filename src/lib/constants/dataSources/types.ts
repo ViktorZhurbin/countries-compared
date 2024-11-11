@@ -4,6 +4,7 @@ type DataSourceBase<T> = {
   id: T;
   url: string;
   name: string;
+  description: string;
 };
 
 type StaticDataSource = DataSourceBase<StaticDataSourceId> & {
