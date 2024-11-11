@@ -1,9 +1,9 @@
+import type { EChartsOption } from "echarts";
 import {
   staticDataSources,
   type StaticDataSourceId,
-} from "$lib/constants/dataSources/static";
+} from "$lib/constants/dataSources";
 import type { PreparedCountry } from "$lib/schema/country";
-import type { EChartsOption } from "echarts";
 import { getDataForOptions } from "./getDataForOptions";
 
 const selectedColor = "#639463";

@@ -1,4 +1,4 @@
-import { staticDataSources } from "$lib/constants/dataSources/static";
+import { staticDataSources } from "$lib/constants/dataSources";
 import type { GetChangedEntries } from "../../types";
 import { getRows } from "./getRows";
 import { skipUpdate } from "./skipUpdate";

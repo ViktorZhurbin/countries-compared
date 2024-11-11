@@ -1,4 +1,4 @@
-import type { StaticDataSourceId } from "$lib/constants/dataSources/static";
+import type { StaticDataSourceId } from "$lib/constants/dataSources";
 import type { PreparedCountry } from "$lib/schema/country";
 
 export const getDataForOptions = (params: {

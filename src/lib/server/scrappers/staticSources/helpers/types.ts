@@ -1,5 +1,5 @@
-import type { StaticDataSourceId } from "$lib/constants/dataSources/static";
 import type { CountryType } from "$lib/schema/country";
+import type { StaticDataSourceId } from "$lib/constants/dataSources";
 
 export type ChangedEntry = {
   rank: number;

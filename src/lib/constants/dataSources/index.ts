@@ -1,3 +1,3 @@
-import { staticDataSources } from "./static";
+export { staticDataSources, StaticDataSourceId } from "./static";
 
-export const dataSources = staticDataSources;
+export type { StaticDataSource } from "./types";

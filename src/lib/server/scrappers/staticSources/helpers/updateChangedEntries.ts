@@ -1,4 +1,4 @@
-import type { StaticDataSourceId } from "$lib/constants/dataSources/static";
+import type { StaticDataSourceId } from "$lib/constants/dataSources";
 import { CountryModel } from "$lib/schema/country";
 import type { ChangedEntry } from "./types";
 

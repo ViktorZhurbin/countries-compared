@@ -1,4 +1,4 @@
-import { staticDataSources } from "$lib/constants/dataSources/static";
+import { staticDataSources } from "$lib/constants/dataSources";
 import { CountryModel } from "$lib/schema/country";
 import { getChangedEntriesFnByStaticSourceId } from "./helpers/changedEntriesByDataSource/getChangedEntriesFnByStaticSourceId";
 import { getCountriesByAllNames } from "./helpers/getCountriesByAllNames";

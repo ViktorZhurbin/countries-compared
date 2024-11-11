@@ -2,7 +2,7 @@
   import Map from "./Map/Map.svelte";
   import UpdateButton from "./UpdateButton.svelte";
   import DataSourcePicker from "./DataSourcePicker.svelte";
-  import { StaticDataSourceId } from "$lib/constants/dataSources/static";
+  import { StaticDataSourceId } from "$lib/constants/dataSources";
   import type { PreparedCountry } from "$lib/schema/country";
   import type { PageData } from "./$types";
 

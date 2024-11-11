@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { init, use, registerMap, type EChartsType } from "echarts/core";
   import type { PreparedCountry } from "$lib/schema/country";
-  import { StaticDataSourceId } from "$lib/constants/dataSources/static";
+  import { StaticDataSourceId } from "$lib/constants/dataSources";
   import { getOptions } from "./helpers/getOptions";
   import { chartModules } from "./constants/chartModules";
 

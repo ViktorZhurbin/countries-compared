@@ -1,5 +1,5 @@
 import * as cheerio from "cheerio";
-import type { StaticDataSource } from "$lib/constants/dataSources/types";
+import type { StaticDataSource } from "$lib/constants/dataSources";
 
 export const getRows = async (dataSource: StaticDataSource) => {
   const { url, tableSelector, rowsSelector = "tbody tr" } = dataSource;

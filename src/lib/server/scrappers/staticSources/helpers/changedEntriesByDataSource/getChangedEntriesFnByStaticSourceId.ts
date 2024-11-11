@@ -1,7 +1,7 @@
 import {
   StaticDataSourceId,
   staticDataSources,
-} from "$lib/constants/dataSources/static";
+} from "$lib/constants/dataSources";
 import { getRows } from "./helpers/getRows";
 import { getChangedRows } from "./helpers/getChangedRows";
 import { skipUpdate } from "./helpers/skipUpdate";

@@ -1,5 +1,8 @@
 import { colorScale } from "$lib/constants/colors";
-import { dataSources } from "$lib/constants/dataSources";
+import {
+  staticDataSources,
+  StaticDataSourceId,
+} from "$lib/constants/dataSources";
 import type { PreparedCountry } from "$lib/schema/country";
 
 enum SortKey {
@@ -9,18 +12,18 @@ enum SortKey {
 }
 
 export class CountriesState {
-  sources = Object.values(dataSources);
-  rankingsByRankingCode: Record<string, number[]> = {};
+  sources = Object.values(staticDataSources);
+  sortedRankingsByRankingCode: Record<string, number[]> = {};
 
   countries: PreparedCountry[] = $state([]);
   sortKeysByColumn = $state(this.getInitialSortKeysByColumn());
 
   constructor(countries: PreparedCountry[]) {
     this.countries = countries;
-    this.rankingsByRankingCode = this.getAllRankingsByCode(countries);
+    this.sortedRankingsByRankingCode = this.getSortedRankingsByCode(countries);
   }
 
-  sort(rankingCode: string = "average") {
+  sortByRanking(rankingCode: StaticDataSourceId) {
     const sortKey = this.sortKeysByColumn[rankingCode];
     const nextSortKey = this.getNextSortKey(sortKey);
 
@@ -71,51 +74,57 @@ export class CountriesState {
         return acc;
       },
       {
-        average: SortKey.None,
         country: SortKey.None,
       },
     );
   }
 
-  private getAllRankingsByCode(countries: PreparedCountry[]) {
-    return countries.reduce<Record<string, number[]>>((acc, country) => {
-      const { rankings } = country;
+  private getSortedRankingsByCode(countries: PreparedCountry[]) {
+    const rankingsByCode = countries.reduce<Record<string, number[]>>(
+      (acc, country) => {
+        const { rankings } = country;
 
-      if (!rankings) {
-        return acc;
-      }
-
-      Object.entries(rankings).forEach(([dataSourceCode, rank]) => {
-        if (!acc[dataSourceCode]) {
-          acc[dataSourceCode] = [];
+        if (!rankings) {
+          return acc;
         }
 
-        acc[dataSourceCode].push(rank);
-      });
+        Object.entries(rankings).forEach(([dataSourceCode, rank]) => {
+          if (!acc[dataSourceCode]) {
+            acc[dataSourceCode] = [];
+          }
 
-      return acc;
-    }, {});
+          acc[dataSourceCode].push(rank);
+        });
+
+        return acc;
+      },
+      {},
+    );
+
+    return Object.entries(rankingsByCode).reduce<Record<string, number[]>>(
+      (acc, [key, value]) => {
+        acc[key] = value.sort((a, b) => a - b);
+
+        return acc;
+      },
+      {},
+    );
   }
 
-  getRankedBgColor({
-    rank,
-    rankingCode,
-  }: {
-    rank?: number;
-    rankingCode: string;
-  }) {
+  getRankedBgColor(params: { rank?: number; rankingCode: StaticDataSourceId }) {
+    const { rank, rankingCode } = params;
+
     if (!rank) {
       return;
     }
 
-    const array = this.rankingsByRankingCode[rankingCode] ?? [];
-    const sortedArray = [...array].sort((a, b) => a - b);
+    const rankings = this.sortedRankingsByRankingCode[rankingCode] ?? [];
 
-    const index = sortedArray.indexOf(rank);
-    const segmentLength = Math.floor(array.length / colorScale.length);
+    const index = rankings.indexOf(rank);
+    const segmentLength = Math.floor(rankings.length / colorScale.length);
 
     const segment = Math.floor(index / segmentLength);
 
-    return colorScale[segment];
+    return colorScale[segment] ?? colorScale.at(-1);
   }
 }

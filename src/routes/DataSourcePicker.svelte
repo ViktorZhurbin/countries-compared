@@ -2,7 +2,7 @@
   import {
     staticDataSources,
     StaticDataSourceId,
-  } from "$lib/constants/dataSources/static";
+  } from "$lib/constants/dataSources";
 
   let props: {
     dataId: StaticDataSourceId;
