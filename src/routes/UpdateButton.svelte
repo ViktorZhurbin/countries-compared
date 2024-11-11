@@ -36,7 +36,7 @@
 
 <div>
   <button disabled={isUpdating} onclick={handleUpdate}> Update </button>
-  <span>
+  <span aria-busy={isUpdating}>
     {isUpdating
       ? "Updating..."
       : `Data updated on ${new Date(lastUpdated).toLocaleString()}`}
