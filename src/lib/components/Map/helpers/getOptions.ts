@@ -4,6 +4,7 @@ import {
 } from "$lib/constants/dataSources/static";
 import type { PreparedCountry } from "$lib/schema/country";
 import type { EChartsOption } from "echarts";
+import { getDataForOptions } from "./getDataForOptions";
 
 export const getOptions = (params: {
   mapId: string;
@@ -12,36 +13,10 @@ export const getOptions = (params: {
 }): EChartsOption => {
   const { countries, mapId, dataId } = params;
 
-  const { min, max, seriesData, codeToName } = countries.reduce<{
-    min: number;
-    max: number;
-    seriesData: { name: string; value: number }[];
-    codeToName: Record<string, string>;
-  }>(
-    (acc, country, index) => {
-      if (index === 0 || country.rankings[dataId] < acc.min) {
-        acc.min = country.rankings[dataId];
-      }
-
-      if (country.rankings[dataId] > acc.max) {
-        acc.max = country.rankings[dataId];
-      }
-
-      acc.seriesData.push({
-        name: country.name,
-        value: country.rankings[dataId],
-      });
-
-      if (country.code === "GR") {
-        acc.codeToName.EL = country.name;
-      } else {
-        acc.codeToName[country.code] = country.name;
-      }
-
-      return acc;
-    },
-    { min: 0, max: 0, seriesData: [], codeToName: {} },
-  );
+  const { min, max, seriesData, codeToName } = getDataForOptions({
+    dataId,
+    countries,
+  });
 
   const dataSource = staticDataSources[dataId];
 
