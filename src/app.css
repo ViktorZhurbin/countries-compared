@@ -1,3 +1,11 @@
+:root {
+  font-size: 14px;
+
+  --pico-border-radius: 6px;
+  --pico-form-element-spacing-vertical: 0.5rem;
+  --pico-form-element-spacing-horizontal: 1rem;
+}
+
 html,
 body {
   font-family: sans-serif;
