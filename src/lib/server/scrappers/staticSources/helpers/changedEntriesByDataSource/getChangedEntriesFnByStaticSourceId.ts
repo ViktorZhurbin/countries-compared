@@ -11,11 +11,28 @@ export const getChangedEntriesFnByStaticSourceId: Record<
   StaticDataSourceId,
   GetChangedEntries
 > = {
-  [StaticDataSourceId.HDI]: async ({ countriesByName, dataSourceId }) =>
-    getChangedRows({
-      dataSourceId,
-      countriesByName,
-    }),
+  [StaticDataSourceId.HDI]: async ({ countriesByName, dataSourceId }) => {
+    const dataSource = staticDataSources[dataSourceId];
+
+    const { $, rows } = await getRows(dataSource);
+
+    if (!rows?.length) return [];
+
+    return rows.toArray().flatMap((element) => {
+      const firstEl = $(element).find("th").first();
+
+      const rank = Number(firstEl.text().trim());
+      const countryName = firstEl.next().text().trim();
+
+      const country = countriesByName[countryName];
+
+      if (skipUpdate(rank, country, dataSource.id)) {
+        return [];
+      }
+
+      return { rank, countryCode: country.code };
+    });
+  },
   [StaticDataSourceId.Governance]: async ({ countriesByName, dataSourceId }) =>
     getChangedRows({
       dataSourceId,

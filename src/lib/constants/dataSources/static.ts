@@ -10,7 +10,7 @@ export const staticDataSources: Record<StaticDataSourceId, StaticDataSource> = {
   [StaticDataSourceId.HDI]: {
     id: StaticDataSourceId.HDI,
     name: "Human Development Index",
-    tableSelector: "h2:has(#List) ~ table",
+    tableSelector: "div:has(> h2#List) ~ table",
     url: "https://en.wikipedia.org/wiki/List_of_countries_by_inequality-adjusted_Human_Development_Index",
   },
   [StaticDataSourceId.Safety]: {

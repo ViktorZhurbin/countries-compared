@@ -17,7 +17,7 @@ export const updateRankingsForStaticSources = async () => {
       dataSourceId: dataSource.id,
     });
 
-    // console.log({ [dataSource.id]: changedEntries });
+    // console.log({ id: dataSource.id, changedEntries });
 
     if (changedEntries?.length) {
       await updateChangedEntries({
