@@ -1,5 +1,4 @@
 import type { CountryType } from "$lib/schema/country";
-import type { StaticDataSourceId } from "$lib/constants/dataSources";
 
 export type ChangedEntry = {
   rank: number;
@@ -7,9 +6,7 @@ export type ChangedEntry = {
 };
 
 export type GetChangedEntries = ({
-  dataSourceId,
   countriesByName,
 }: {
-  dataSourceId: StaticDataSourceId;
   countriesByName: Record<string, CountryType>;
 }) => Promise<ChangedEntry[]>;

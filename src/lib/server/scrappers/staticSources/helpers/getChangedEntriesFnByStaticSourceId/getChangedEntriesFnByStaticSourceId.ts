@@ -2,17 +2,16 @@ import {
   StaticDataSourceId,
   staticDataSources,
 } from "$lib/constants/dataSources";
-import { getRows } from "./helpers/getRows";
-import { getChangedRows } from "./helpers/getChangedRows";
-import { skipUpdate } from "./helpers/skipUpdate";
+import { getRows } from "./getRows";
+import { skipUpdate } from "./skipUpdate";
 import type { GetChangedEntries } from "../types";
 
 export const getChangedEntriesFnByStaticSourceId: Record<
   StaticDataSourceId,
   GetChangedEntries
 > = {
-  [StaticDataSourceId.HDI]: async ({ countriesByName, dataSourceId }) => {
-    const dataSource = staticDataSources[dataSourceId];
+  [StaticDataSourceId.HDI]: async ({ countriesByName }) => {
+    const dataSource = staticDataSources[StaticDataSourceId.HDI];
 
     const { $, rows } = await getRows(dataSource);
 
@@ -33,13 +32,30 @@ export const getChangedEntriesFnByStaticSourceId: Record<
       return { rank, countryCode: country.code };
     });
   },
-  [StaticDataSourceId.Governance]: async ({ countriesByName, dataSourceId }) =>
-    getChangedRows({
-      dataSourceId,
-      countriesByName,
-    }),
-  [StaticDataSourceId.Safety]: async ({ countriesByName, dataSourceId }) => {
-    const dataSource = staticDataSources[dataSourceId];
+  [StaticDataSourceId.Governance]: async ({ countriesByName }) => {
+    const dataSource = staticDataSources[StaticDataSourceId.Governance];
+
+    const { $, rows } = await getRows(dataSource);
+
+    if (!rows?.length) return [];
+
+    return rows.toArray().flatMap((element) => {
+      const firstEl = $(element).find("td").first();
+
+      const rank = Number(firstEl.text().trim());
+      const countryName = firstEl.next().text().trim();
+
+      const country = countriesByName[countryName];
+
+      if (skipUpdate(rank, country, dataSource.id)) {
+        return [];
+      }
+
+      return { rank, countryCode: country.code };
+    });
+  },
+  [StaticDataSourceId.Safety]: async ({ countriesByName }) => {
+    const dataSource = staticDataSources[StaticDataSourceId.Safety];
 
     const { $, rows } = await getRows(dataSource);
 
