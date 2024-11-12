@@ -40,6 +40,7 @@
     align-items: center;
     gap: 4px;
 
+    height: 100dvh;
     padding: 8px 6px;
 
     background-color: hsl(var(--bg-color) / 5%);

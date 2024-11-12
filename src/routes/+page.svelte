@@ -41,11 +41,14 @@
     display: grid;
     grid-template-columns: auto 1fr;
 
+    height: 100dvh;
     width: 100%;
   }
 
   main {
     display: flex;
     padding: 12px;
+
+    overflow: auto;
   }
 </style>
