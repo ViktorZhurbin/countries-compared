@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { fly } from "svelte/transition";
   import { isViewHash, ViewHash } from "$lib/constants/views";
   import type { PageData } from "./$types";
   import NavBar from "./NavBar.svelte";
@@ -27,6 +28,8 @@
 
     setView(viewHash);
   });
+
+  const slideIn = { x: -200 };
 </script>
 
 <div class="wrapper">
@@ -34,9 +37,13 @@
 
   <main>
     {#if view === ViewHash.Table}
-      <TableView {countries} />
+      <div in:fly={slideIn}>
+        <TableView {countries} />
+      </div>
     {:else if view === ViewHash.Map}
-      <MapView {countries} geoJsonEurope={data.geoJsonEurope} />
+      <div in:fly={slideIn}>
+        <MapView {countries} geoJsonEurope={data.geoJsonEurope} />
+      </div>
     {:else}
       {null}
     {/if}
