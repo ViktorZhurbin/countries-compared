@@ -24,3 +24,12 @@ svg {
   width: var(--size, 1.5rem);
   height: var(--size, 1.5rem);
 }
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

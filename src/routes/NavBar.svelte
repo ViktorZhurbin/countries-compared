@@ -1,12 +1,16 @@
 <script lang="ts">
-  import ButtonIcon from "$lib/components/ButtonIcon.svelte";
   import { Views } from "$lib/constants/views";
+  import type { PreparedCountry } from "$lib/schema/country";
+  import ButtonIcon from "$lib/components/ButtonIcon.svelte";
   import MapIcon from "$lib/components/icons/MapIcon.svelte";
   import TableIcon from "$lib/components/icons/TableIcon.svelte";
+  import UpdateButton from "./UpdateButton/UpdateButton.svelte";
 
   let props: {
     view: Views;
     setView: (view: Views) => void;
+    lastUpdated: string;
+    setCountries: (countries: PreparedCountry[]) => void;
   } = $props();
 
   const mappedViews = [
@@ -16,18 +20,29 @@
 </script>
 
 <div class="wrapper">
-  {#each mappedViews as { view, label, Icon } (view)}
-    {@const isActive = props.view === view}
+  <div class="top">
+    {#each mappedViews as { view, label, Icon } (view)}
+      {@const isActive = props.view === view}
 
-    <ButtonIcon --px="3px" onclick={() => props.setView(view)}>
-      <div class="buttonContent" class:isActive>
-        <span class="iconWrapper">
-          <Icon />
-        </span>
-        <small>{label}</small>
-      </div>
-    </ButtonIcon>
-  {/each}
+      <ButtonIcon
+        --px="3px"
+        --border-width="0"
+        onclick={() => props.setView(view)}
+      >
+        <div class="buttonContent" class:isActive>
+          <span class="iconWrapper">
+            <Icon />
+          </span>
+          <small>{label}</small>
+        </div>
+      </ButtonIcon>
+    {/each}
+  </div>
+
+  <UpdateButton
+    lastUpdated={props.lastUpdated}
+    setCountries={props.setCountries}
+  />
 </div>
 
 <style>
@@ -38,13 +53,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    justify-content: space-between;
 
     height: 100dvh;
-    padding: 8px 6px;
+    /* width: 60px; */
+    padding: 8px 4px;
 
     background-color: hsl(var(--bg-color) / 5%);
     border: 1px solid hsla(0, 0%, 90%);
+  }
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
   }
 
   .buttonContent {

@@ -1,15 +1,12 @@
 <script lang="ts">
+  import type { PreparedCountry } from "$lib/schema/country";
   import { StaticDataSourceId } from "$lib/constants/dataSources";
   import DataSourcePicker from "../DataSourcePicker.svelte";
   import Map from "./Map.svelte";
-  import UpdateButton from "../UpdateButton.svelte";
-  import type { PreparedCountry } from "$lib/schema/country";
 
   let props: {
     geoJsonEurope: any;
-    lastUpdated: string;
     countries: PreparedCountry[];
-    setCountries: (countries: PreparedCountry[]) => void;
   } = $props();
 
   let dataId = $state(StaticDataSourceId.HDI);
@@ -26,11 +23,6 @@
 
     <Map {dataId} countries={props.countries} geoJson={props.geoJsonEurope} />
   </section>
-
-  <UpdateButton
-    lastUpdated={props.lastUpdated}
-    setCountries={props.setCountries}
-  />
 </div>
 
 <style>

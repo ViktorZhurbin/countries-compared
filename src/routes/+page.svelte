@@ -20,18 +20,13 @@
 </script>
 
 <div class="wrapper">
-  <NavBar {view} {setView} />
+  <NavBar {view} {setView} {setCountries} lastUpdated={data.lastUpdated} />
 
   <main>
     {#if view === Views.Table}
       <TableView {countries} />
     {:else}
-      <MapView
-        {countries}
-        {setCountries}
-        lastUpdated={data.lastUpdated}
-        geoJsonEurope={data.geoJsonEurope}
-      />
+      <MapView {countries} geoJsonEurope={data.geoJsonEurope} />
     {/if}
   </main>
 </div>

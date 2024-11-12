@@ -18,7 +18,10 @@
           <abbr title={dataSource.description}>
             {dataSource.name}
           </abbr>
-          <ButtonIcon onclick={() => State.sortByRanking(dataSource.id)}>
+          <ButtonIcon
+            --border-width="0"
+            onclick={() => State.sortByRanking(dataSource.id)}
+          >
             <SortIcon --size="1em" />
           </ButtonIcon>
         </th>
