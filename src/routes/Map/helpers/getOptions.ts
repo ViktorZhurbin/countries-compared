@@ -25,7 +25,7 @@ export const getOptions = (params: {
   return {
     title: {
       text: dataSource.name,
-      subtext: "Source",
+      subtext: "Data source",
       sublink: dataSource.url,
     },
     tooltip: {

@@ -3,6 +3,7 @@
     staticDataSources,
     StaticDataSourceId,
   } from "$lib/constants/dataSources";
+  import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
 
   let props: {
     dataId: StaticDataSourceId;
@@ -21,10 +22,12 @@
           props.setDataId(event.currentTarget.value as StaticDataSourceId);
         }}
       />
-      <abbr title={dataSource.description}>
+      <span>
         {dataSource.name}
-      </abbr>
-      <a href={dataSource.url} target="_blank" rel="noreferrer">(link)</a>
+        <span title={dataSource.description}>
+          <InfoIcon --size="1em" />
+        </span>
+      </span>
     </label>
   {/each}
 </div>
@@ -33,9 +36,5 @@
   .wrapper {
     display: flex;
     flex-direction: column;
-  }
-
-  abbr {
-    cursor: pointer;
   }
 </style>
