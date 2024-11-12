@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Views } from "$lib/constants/views";
+  import { ViewHash } from "$lib/constants/views";
   import type { PreparedCountry } from "$lib/schema/country";
   import ButtonIcon from "$lib/components/ButtonIcon.svelte";
   import MapIcon from "$lib/components/icons/MapIcon.svelte";
@@ -7,15 +7,15 @@
   import UpdateButton from "./UpdateButton/UpdateButton.svelte";
 
   let props: {
-    view: Views;
-    setView: (view: Views) => void;
+    view: ViewHash | null;
+    setView: (view: ViewHash) => void;
     lastUpdated: string;
     setCountries: (countries: PreparedCountry[]) => void;
   } = $props();
 
   const mappedViews = [
-    { view: Views.Map, label: "Map", Icon: MapIcon },
-    { view: Views.Table, label: "Table", Icon: TableIcon },
+    { view: ViewHash.Map, label: "Map", Icon: MapIcon },
+    { view: ViewHash.Table, label: "Table", Icon: TableIcon },
   ];
 </script>
 
