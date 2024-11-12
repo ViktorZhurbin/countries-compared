@@ -15,7 +15,7 @@
 
 ## To run the app locally
 
-Tested with Node v20 and v22.
+Tested with Node v20.
 
 You'd need to copy `env.example`, rename it to `.env`, and put your `MONGODB_URI="mongodb+srv://<userName>:<password>@cluster0.h2kdfoe.mongodb.net/<dbName>` in there.
 

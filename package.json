@@ -10,6 +10,9 @@
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint ."
   },
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "@sveltejs/kit": "^2.7.4",
     "cheerio": "^1.0.0",
