@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Views } from "$lib/constants/views";
   import type { PageData } from "./$types";
-  import NavBar from "./NavBar/NavBar.svelte";
+  import NavBar from "./NavBar.svelte";
   import MapView from "./Map/MapView.svelte";
   import TableView from "./TableView/TableView.svelte";
 

@@ -1,7 +1,7 @@
 <script lang="ts">
   import ButtonIcon from "$lib/components/ButtonIcon.svelte";
   import type { PreparedCountry } from "$lib/schema/country";
-  import SortIcon from "./SortIcon.svelte";
+  import SortIcon from "../../lib/components/icons/SortIcon.svelte";
   import { CountriesState } from "./state.svelte";
 
   let props: { countries: PreparedCountry[] } = $props();

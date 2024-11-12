@@ -14,10 +14,3 @@
   <path d="M12 9h.01" />
   <path d="M11 12h1v4h1" />
 </svg>
-
-<style>
-  svg {
-    width: var(--size, 24px);
-    height: var(--size, 24px);
-  }
-</style>

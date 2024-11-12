@@ -19,3 +19,8 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+svg {
+  width: var(--size, 1.5rem);
+  height: var(--size, 1.5rem);
+}

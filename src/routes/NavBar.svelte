@@ -1,8 +1,8 @@
 <script lang="ts">
   import ButtonIcon from "$lib/components/ButtonIcon.svelte";
   import { Views } from "$lib/constants/views";
-  import MapIcon from "./MapIcon.svelte";
-  import TableIcon from "./TableIcon.svelte";
+  import MapIcon from "$lib/components/icons/MapIcon.svelte";
+  import TableIcon from "$lib/components/icons/TableIcon.svelte";
 
   let props: {
     view: Views;
