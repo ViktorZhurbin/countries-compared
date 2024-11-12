@@ -1,49 +1,51 @@
 <script lang="ts">
-  import Map from "./Map/Map.svelte";
-  import UpdateButton from "./UpdateButton.svelte";
-  import DataSourcePicker from "./DataSourcePicker.svelte";
-  import { StaticDataSourceId } from "$lib/constants/dataSources";
-  import type { PreparedCountry } from "$lib/schema/country";
+  import { Views } from "$lib/constants/views";
   import type { PageData } from "./$types";
+  import NavBar from "./NavBar/NavBar.svelte";
+  import MapView from "./Map/MapView.svelte";
+  import TableView from "./TableView/TableView.svelte";
 
   let { data }: { data: PageData } = $props();
 
+  let view = $state(Views.Map);
   let countries = $state(data.countries);
-  let dataId = $state(StaticDataSourceId.HDI);
+
+  const setView = (newView: Views) => {
+    view = newView;
+  };
+
+  const setCountries = (newCountries: any) => {
+    countries = newCountries;
+  };
 </script>
 
-<main>
-  <section>
-    <DataSourcePicker
-      {dataId}
-      setDataId={(newId) => {
-        dataId = newId;
-      }}
-    />
+<div class="wrapper">
+  <NavBar {view} {setView} />
 
-    <Map {dataId} {countries} geoJson={data.geoJsonEurope} />
-  </section>
-
-  <UpdateButton
-    lastUpdated={data.lastUpdated}
-    setCountries={(newCountries: PreparedCountry[]) => {
-      countries = newCountries;
-    }}
-  />
-</main>
+  <main>
+    {#if view === Views.Table}
+      <TableView {countries} />
+    {:else}
+      <MapView
+        {countries}
+        {setCountries}
+        lastUpdated={data.lastUpdated}
+        geoJsonEurope={data.geoJsonEurope}
+      />
+    {/if}
+  </main>
+</div>
 
 <style>
-  main {
-    height: 100dvh;
-
+  .wrapper {
     display: grid;
-    grid-template-rows: 1fr auto;
-    gap: 16px;
-    padding: 24px 12px;
+    grid-template-columns: auto 1fr;
+
+    width: 100%;
   }
 
-  section {
-    display: grid;
-    gap: 16px;
+  main {
+    display: flex;
+    padding: 12px;
   }
 </style>

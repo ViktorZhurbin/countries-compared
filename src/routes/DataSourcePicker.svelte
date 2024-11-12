@@ -34,4 +34,8 @@
     display: flex;
     flex-direction: column;
   }
+
+  abbr {
+    cursor: pointer;
+  }
 </style>

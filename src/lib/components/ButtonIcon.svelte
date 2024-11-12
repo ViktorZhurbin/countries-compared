@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
 
-  let { children, ...restProps }: { children: Snippet; onclick: () => void } =
+  let { children, ...restProps }: { children: Snippet; onclick?: () => void } =
     $props();
 </script>
 
@@ -12,6 +12,7 @@
 <style>
   button {
     border: unset;
-    padding: 3px 6px;
+    padding-block: var(--py, 3px);
+    padding-inline: var(--px, 6px);
   }
 </style>
