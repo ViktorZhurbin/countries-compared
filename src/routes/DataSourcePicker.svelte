@@ -3,7 +3,6 @@
     staticDataSources,
     StaticDataSourceId,
   } from "$lib/constants/dataSources";
-  import InfoIcon from "$lib/components/icons/InfoIcon.svelte";
 
   let props: {
     dataId: StaticDataSourceId;
@@ -22,11 +21,8 @@
           props.setDataId(event.currentTarget.value as StaticDataSourceId);
         }}
       />
-      <span>
+      <span data-tooltip={dataSource.description} data-placement="bottom">
         {dataSource.name}
-        <span title={dataSource.description}>
-          <InfoIcon --size="1em" />
-        </span>
       </span>
     </label>
   {/each}
@@ -36,5 +32,12 @@
   .wrapper {
     display: flex;
     flex-direction: column;
+  }
+
+  span[data-tooltip] {
+    &::before {
+      width: 200px;
+      white-space: normal;
+    }
   }
 </style>

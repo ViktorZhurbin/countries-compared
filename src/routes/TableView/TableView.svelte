@@ -15,9 +15,9 @@
       <th onclick={() => State.sortByCountry()}>Country</th>
       {#each State.sources as dataSource (dataSource.id)}
         <th>
-          <abbr title={dataSource.description}>
+          <span data-tooltip={dataSource.description} data-placement="bottom">
             {dataSource.name}
-          </abbr>
+          </span>
           <ButtonIcon
             --border-width="0"
             onclick={() => State.sortByRanking(dataSource.id)}
@@ -68,5 +68,12 @@
   table tr > th {
     border: 1px solid #a2a9b1;
     padding: 0.2em 0.4em;
+  }
+
+  span[data-tooltip] {
+    &::before {
+      width: 200px;
+      white-space: normal;
+    }
   }
 </style>
