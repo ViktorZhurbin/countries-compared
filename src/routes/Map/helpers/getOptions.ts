@@ -6,8 +6,6 @@ import {
 import type { PreparedCountry } from "$lib/schema/country";
 import { getDataForOptions } from "./getDataForOptions";
 
-const selectedColor = "#639463";
-
 export const getOptions = (params: {
   mapId: string;
   dataId: StaticDataSourceId;
@@ -51,20 +49,16 @@ export const getOptions = (params: {
       {
         name: "Europe",
         type: "map",
-        selectedMode: "single",
         emphasis: {
           itemStyle: {
-            areaColor: selectedColor,
-            // shadowBlur: 1,
-            // shadowColor: "rgba(0, 0, 0, 0.5)",
+            areaColor: "inherit",
+            borderWidth: 2,
+            opacity: 0.7,
           },
         },
         select: {
           itemStyle: {
-            areaColor: selectedColor,
             borderWidth: 2,
-            // shadowBlur: 1,
-            // shadowColor: "rgba(0, 0, 0, 0.5)",
           },
         },
         map: mapId,
@@ -72,8 +66,8 @@ export const getOptions = (params: {
           show: true,
         },
         roam: true,
-        zoom: 6,
-        center: [10, 45],
+        zoom: 4,
+        center: [10, 50],
         nameProperty: "CNTR_CODE",
         data: seriesData,
         nameMap: codeToName,
